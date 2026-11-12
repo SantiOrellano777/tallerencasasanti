@@ -19,7 +19,7 @@ public class Main {
         return suma / notas.length;
     }
 
-    // Pide la cantidad de notas hasta que el usuario escriba un entero positivo
+    
     static int leerCantidad(Scanner sc) {
         while (true) {
             System.out.print("¿Cuántas notas? ");
@@ -35,7 +35,7 @@ public class Main {
         }
     }
 
-    // Pide una nota hasta que sea un número entre 0 y 5
+   
     static double leerNota(Scanner sc, int numero) {
         while (true) {
             System.out.print("Nota " + numero + " (0 a 5): ");

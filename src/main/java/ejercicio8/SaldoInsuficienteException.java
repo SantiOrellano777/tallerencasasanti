@@ -4,10 +4,17 @@
  */
 package ejercicio8;
 
-/**
- *
- * @author SANTIAGO
- */
-public class SaldoInsuficienteException {
-    
+public class SaldoInsuficienteException extends Exception {
+
+    private final double faltante;
+
+    public SaldoInsuficienteException(double saldo, double monto) {
+        super("Saldo insuficiente. Saldo: $" + CuentaBancaria.formato(saldo)
+                + " - Faltan: $" + CuentaBancaria.formato(monto - saldo));
+        this.faltante = monto - saldo;
+    }
+
+    public double getFaltante() {
+        return faltante;
+    }
 }

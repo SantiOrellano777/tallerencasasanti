@@ -4,10 +4,9 @@
  */
 package ejercicio8;
 
-/**
- *
- * @author SANTIAGO
- */
-public class MontoInvalidoException {
-    
+public class MontoInvalidoException extends Exception {
+
+    public MontoInvalidoException(double monto) {
+        super("Monto inválido: " + monto + ". Debe ser mayor que cero.");
+    }
 }
