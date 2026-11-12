@@ -3,29 +3,25 @@
  */
 
 package com.poo.practicas.modelo.tallerencasasanti;
+
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
-/**
- *
- * @author SANTIAGO
- */
-public class Tallerencasasanti {
-    
-    
-    interface Llamable {
+
+interface Llamable {
     void llamar(String numero);
     void colgar();
     default String funcion() { return "Llamadas"; }
-    }
-    
-    interface Fotografiable {
+}
+
+interface Fotografiable {
     void tomarFoto();
     int getMegapixeles();
     default String funcion() { return "Fotografía"; }
-    }
-    
-    abstract class Dispositivo {
+}
+
+abstract class Dispositivo {
     protected String marca;
     protected String modelo;
     protected double precio;
@@ -35,7 +31,7 @@ public class Tallerencasasanti {
         this.modelo = modelo;
         this.precio = precio;
     }
-    
+
     protected String precioFormateado() {
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols(Locale.US);
         simbolos.setGroupingSeparator('.');
@@ -43,32 +39,103 @@ public class Tallerencasasanti {
     }
 
     public abstract void describir();
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+}
 
+class Smartphone extends Dispositivo implements Llamable, Fotografiable {
+    private int megapixeles;
+
+    public Smartphone(String marca, String modelo, double precio, int megapixeles) {
+        super(marca, modelo, precio);
+        this.megapixeles = megapixeles;
+    }
+
+    @Override
+    public String funcion() {
+        return "Llamadas y fotografía";
+    }
+
+    @Override
+    public void describir() {
+        System.out.println("Smartphone " + marca + " " + modelo
+                + " - $" + precioFormateado() + " - " + funcion());
+    }
+
+    @Override
+    public void llamar(String numero) {
+        System.out.println(marca + " llamando a " + numero);
+    }
+
+    @Override
+    public void colgar() {
+        System.out.println(marca + " finalizó la llamada");
+    }
+
+    @Override
+    public void tomarFoto() {
+        System.out.println(marca + " tomó una foto de " + megapixeles + " MP");
+    }
+
+    @Override
+    public int getMegapixeles() {
+        return megapixeles;
+    }
+}
+
+class Camara extends Dispositivo implements Fotografiable {
+    private int megapixeles;
+
+    public Camara(String marca, String modelo, double precio, int megapixeles) {
+        super(marca, modelo, precio);
+        this.megapixeles = megapixeles;
+    }
+
+    @Override
+    public void describir() {
+        System.out.println("Cámara " + marca + " " + modelo
+                + " - $" + precioFormateado() + " - " + funcion());
+    }
+
+    @Override
+    public void tomarFoto() {
+        System.out.println(marca + " tomó una foto profesional de " + megapixeles + " MP");
+    }
+
+    @Override
+    public int getMegapixeles() {
+        return megapixeles;
+    }
+}
+
+public class Tallerencasasanti {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Dispositivo[] dispositivos = {
+            new Smartphone("Samsung", "Galaxy S24", 3500000, 50),
+            new Smartphone("Xiaomi", "Mi 10", 2200000, 108),
+            new Camara("Canon", "EOS R50", 4200000, 24)
+        };
+
+        int mayor = 0;
+
+        for (Dispositivo d : dispositivos) {
+            d.describir();
+
+            if (d instanceof Fotografiable) {
+                Fotografiable f = (Fotografiable) d;
+                f.tomarFoto();
+                if (f.getMegapixeles() > mayor) {
+                    mayor = f.getMegapixeles();
+                }
+            }
+
+            if (d instanceof Llamable) {
+                Llamable l = (Llamable) d;
+                l.llamar("3001234567");
+                l.colgar();
+            }
+            System.out.println();
+        }
+
+        System.out.println("Mayor resolución: " + mayor + " MP");
     }
 }
 
