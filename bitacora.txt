@@ -1,0 +1,8 @@
+[2026-11-12 15:26:55] Sistema iniciado
+[2026-11-12 15:26:55] ERROR: no se pudo conectar a la base de datos
+[2026-11-12 15:26:55] Usuario admin inició sesión
+[2026-11-12 15:26:55] ERROR: tiempo de espera agotado
+[2026-11-12 15:27:40] Sistema iniciado
+[2026-11-12 15:27:40] ERROR: no se pudo conectar a la base de datos
+[2026-11-12 15:27:40] Usuario admin inició sesión
+[2026-11-12 15:27:40] ERROR: tiempo de espera agotado
