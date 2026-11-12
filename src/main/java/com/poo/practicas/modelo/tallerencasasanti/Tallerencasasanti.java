@@ -36,7 +36,14 @@ public class Tallerencasasanti {
         this.precio = precio;
     }
     
-    
+    protected String precioFormateado() {
+        DecimalFormatSymbols simbolos = new DecimalFormatSymbols(Locale.US);
+        simbolos.setGroupingSeparator('.');
+        return new DecimalFormat("#,##0", simbolos).format(precio);
+    }
+
+    public abstract void describir();
+    }
     
     
     
